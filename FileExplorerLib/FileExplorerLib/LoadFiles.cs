@@ -18,7 +18,6 @@ namespace FileExplorerLib
             DirectoryInfo root = new DirectoryInfo(path);
             return GetFileDir(root);
         }
-
         /// <summary>
         /// Рекурсивный метод для поиска файлов
         /// </summary>
@@ -29,8 +28,7 @@ namespace FileExplorerLib
             DirectoryModel result = new DirectoryModel();
             result.Name = path.Name;
             result.CreateTime = path.CreationTime;
-            FileInfo[] files = null;
-           
+            FileInfo[] files = null;           
             try
             {
                 files = path.GetFiles("*.*");
@@ -39,17 +37,14 @@ namespace FileExplorerLib
             {
                 // Доступ запрещен
                 result.IsAccess = false;
-                result.Message = error.Message;
-                return result;
+                result.Message = error.Message;               
             }
             catch (System.IO.DirectoryNotFoundException error)
             {
                 // Директория не найдена.
                 result.IsExistence = false;
-                result.Message = error.Message;
-                return result;
-            }
-
+                result.Message = error.Message;                
+            }            
             if (files != null)
             {
                 // Проходим по всем файлам текущей директории
@@ -63,7 +58,6 @@ namespace FileExplorerLib
                         SetLength = file.Length
                     });
                 }
-
                 // Проходим по всем директориям в текущем каталоге                
                 foreach (var dirInfo in path.GetDirectories())
                 {                    
