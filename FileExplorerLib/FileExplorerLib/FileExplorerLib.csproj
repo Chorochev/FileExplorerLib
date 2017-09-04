@@ -44,6 +44,7 @@
     <Compile Include="BaseObjectModel.cs" />
     <Compile Include="DirectoryModel.cs" />
     <Compile Include="FileModel.cs" />
+    <Compile Include="LoadFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
