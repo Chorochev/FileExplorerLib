@@ -27,8 +27,9 @@ namespace FileExplorerLib
         {
             DirectoryModel result = new DirectoryModel();
             result.Name = path.Name;
+            result.FullName = path.FullName;
             result.CreateTime = path.CreationTime;
-            FileInfo[] files = null;           
+            FileInfo[] files = null;
             try
             {
                 files = path.GetFiles("*.*");
@@ -37,30 +38,31 @@ namespace FileExplorerLib
             {
                 // Доступ запрещен
                 result.IsAccess = false;
-                result.Message = error.Message;               
+                result.Message = error.Message;
             }
             catch (System.IO.DirectoryNotFoundException error)
             {
                 // Директория не найдена.
                 result.IsExistence = false;
-                result.Message = error.Message;                
-            }            
+                result.Message = error.Message;
+            }
             if (files != null)
             {
                 // Проходим по всем файлам текущей директории
                 foreach (FileInfo file in files)
-                {                    
+                {
                     result.Files.Add(new FileModel()
                     {
                         Name = file.Name,
                         Extension = file.Extension,
                         CreateTime = file.CreationTime,
-                        SetLength = file.Length
+                        SetLength = file.Length,
+                        FullName = file.FullName
                     });
                 }
                 // Проходим по всем директориям в текущем каталоге                
                 foreach (var dirInfo in path.GetDirectories())
-                {                    
+                {
                     var newDir = GetFileDir(dirInfo);
                     // Рекурсивный заход в поддиректорию
                     result.Directories.Add(newDir);

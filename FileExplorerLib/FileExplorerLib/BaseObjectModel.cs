@@ -31,11 +31,16 @@ namespace FileExplorerLib
         /// Сообщение
         /// </summary>
         public string Message { get; set; }
+        /// <summary>
+        /// Полный путь к файлу или директории
+        /// </summary>
+        public string FullName { get; set; }
 
         public BaseObjectModel()
         {
             IsAccess = true;
-            IsExistence = true;
+            IsExistence = true;           
+            Message = string.Empty;
         }
     }
 }
